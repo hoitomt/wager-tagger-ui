@@ -1,4 +1,4 @@
-sportsbook_api_ui
+Sportsbook API User Interface
 =================
 
 UI for sportsbook API
