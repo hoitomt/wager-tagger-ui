@@ -1,6 +1,8 @@
 $(function(){
   console.log("Run it");
-  $('#myCarousel').carousel({});
+  $('#myCarousel').carousel({
+    interval: false
+  });
 
   $('#myCarousel').swiperight(function() {
     $(this).carousel('prev');
