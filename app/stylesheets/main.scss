@@ -1,7 +1,16 @@
 body {
   padding-top: 50px;
 }
-#tickets {
-  ul { padding: 0px; }
-  li { list-style: none; }
+.tag-amount-panel {
+  margin-top: 5px;
+}
+.custom-tag-amount-container {
+  margin-top: 5px;
+  form {
+    input {
+      float: left;
+      width: 150px;
+      margin-right: 5px;
+    }
+  }
 }

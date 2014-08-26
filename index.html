@@ -47,8 +47,25 @@
             <h4>{{ticket.amount_wagered | currency}} (Tagged: {{amountTagged | currency}})</h4>
             <div>
               <span ng-repeat="tag in tags" style="margin-right: 5px;">
-                <button class="btn btn-success" ng-click="selectTag(ticket, tag)" ng-class="isSelectedTag(ticket, tag)">{{tag.name}}</button>
+                <button class="btn btn-primary"
+                        ng-click="selectTag(ticket, tag)"
+                        ng-class="isSelectedTag(ticket, tag) ? 'btn-danger' : '' ">
+                  {{tag.name}}
+                </button>
               </span>
+            </div>
+            <div id="collapse-tag-amount-{{ticket.id}}" class="tag-amount-panel" ng-show="isSelectedTicket(ticket)">
+              <button class="btn btn-success" ng-click="selectAmount(ticket, 5.0)">$5</button>
+              <button class="btn btn-success" ng-click="selectAmount(ticket, 10.0)">$10</button>
+              <button class="btn btn-success" ng-click="selectAmount(ticket, 15.0)">$15</button>
+              <button class="btn btn-success" ng-click="selectAmount(ticket, 20.0)">$20</button>
+              <button class="btn btn-success" ng-click="selectCustomTagAmount(ticket, 0)">Custom</button>
+            </div>
+            <div ng-show="customAmountSelected(ticket)" class="custom-tag-amount-container">
+              <form role="form" class="form-inline">
+                <input class="form-control" id="tag-amount" placeholder="Amount">
+                <button class="btn btn-success" ng-click="setCustomTagAmount(ticket)">Submit</button>
+              </form>
             </div>
             <table class="table-condensed" ng-repeat="ticketLineItem in ticket.ticket_line_items">
               <tr>

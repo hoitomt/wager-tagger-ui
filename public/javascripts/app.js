@@ -11,38 +11,49 @@ app.controller("NavigationController", function($scope) {
 });
 
 app.controller("TicketController", function($scope) {
-  var addTag, calculateAmountTagged, isSelectedTag, selectTag;
+  var calculateAmountTagged;
   $scope.tickets = api_tickets;
   $scope.tags = api_tags;
-  $scope.selectedTag = null;
+  $scope.selectedTicketTag = null;
+  $scope.selectedCustomTagAmount = null;
   calculateAmountTagged = function() {
     return 0.0;
   };
-  selectTag = function(ticket, tag) {
-    console.log("Select Tag: Tag Id: " + tag.id);
-    $scope.selectedTag = {
-      ticket_id: ticket.id,
-      tag_id: tag.id
-    };
-  };
-  addTag = function(ticketId, tagId) {
-    return console.log("Add Tag - Ticket ID: " + ticketId + ", Tag Id: " + tagId);
-  };
-  isSelectedTag = function(ticket, tag) {
-    var matches;
-    console.log("" + tag.id + " == " + ($scope.selectedTag ? $scope.selectedTag.id : void 0));
-    matches = ($scope.selectedTag != null) && $scope.selectedTag.ticket_id === ticket.id && $scope.selectedTag.tag_id === tag.id;
-    if (matches) {
-      console.log("Matches");
-      return "btn-warning";
+  $scope.selectTag = function(ticket, tag) {
+    if ($scope.isSelectedTag(ticket, tag)) {
+      $scope.selectedTicketTag = null;
     } else {
-      return "";
+      $scope.selectedTicketTag = {
+        ticket_id: ticket.id,
+        tag_id: tag.id
+      };
+    }
+    return $scope.selectedCustomTagAmount = null;
+  };
+  $scope.selectAmount = function(ticket, amount) {
+    if ($scope.selectedTicketTag) {
+      return console.log("Ticket " + ticket.id + ", Amount " + amount + " Tag " + $scope.selectedTicketTag.tag_id);
     }
   };
-  $scope.selectTag = selectTag;
-  $scope.isSelectedTag = isSelectedTag;
-  $scope.amountTagged = calculateAmountTagged();
-  return $scope.addTag = addTag;
+  $scope.addTag = function(ticketId, tagId) {
+    return console.log("Add Tag - Ticket ID: " + ticketId + ", Tag Id: " + tagId);
+  };
+  $scope.isSelectedTag = function(ticket, tag) {
+    return ($scope.selectedTicketTag != null) && $scope.selectedTicketTag.ticket_id === ticket.id && $scope.selectedTicketTag.tag_id === tag.id;
+  };
+  $scope.isSelectedTicket = function(ticket) {
+    return ($scope.selectedTicketTag != null) && $scope.selectedTicketTag.ticket_id === ticket.id;
+  };
+  $scope.selectCustomTagAmount = function(ticket) {
+    console.log("Select Custom Tag Amount");
+    return $scope.selectedCustomTagAmount = {
+      ticket_id: ticket.id
+    };
+  };
+  $scope.customAmountSelected = function(ticket) {
+    return ($scope.selectedCustomTagAmount != null) && $scope.selectedCustomTagAmount.ticket_id === ticket.id;
+  };
+  return $scope.amountTagged = calculateAmountTagged();
 });
 
 api_tags = [

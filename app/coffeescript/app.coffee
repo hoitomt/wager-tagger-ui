@@ -11,35 +11,53 @@ app.controller "NavigationController", ($scope) ->
 app.controller "TicketController", ($scope) ->
   $scope.tickets = api_tickets
   $scope.tags = api_tags
-  $scope.selectedTag = null
+  $scope.selectedTicketTag = null
+  $scope.selectedCustomTagAmount = null
 
   # This should live on a ticket model
   calculateAmountTagged = () ->
     0.0
 
-  selectTag = (ticket, tag) ->
-    console.log("Select Tag: Tag Id: #{tag.id}")
-    $scope.selectedTag = {ticket_id: ticket.id, tag_id: tag.id}
-    return
+  $scope.selectTag = (ticket, tag) ->
+    if $scope.isSelectedTag(ticket, tag)
+      $scope.selectedTicketTag = null
+    else
+      $scope.selectedTicketTag = {ticket_id: ticket.id, tag_id: tag.id}
+    $scope.selectedCustomTagAmount = null
 
-  addTag = (ticketId, tagId) ->
+  $scope.selectAmount = (ticket, amount) ->
+    if $scope.selectedTicketTag
+      console.log "Ticket #{ticket.id}, Amount #{amount} Tag #{$scope.selectedTicketTag.tag_id}"
+
+  $scope.addTag = (ticketId, tagId) ->
     console.log("Add Tag - Ticket ID: #{ticketId}, Tag Id: #{tagId}")
 
-  isSelectedTag = (ticket, tag) ->
-    console.log "#{tag.id} == #{if $scope.selectedTag then $scope.selectedTag.id}"
-    matches = $scope.selectedTag? &&
-              $scope.selectedTag.ticket_id is ticket.id &&
-              $scope.selectedTag.tag_id is tag.id
-    if matches
-      console.log "Matches"
-      return "btn-warning"
-    else
-      return ""
+  $scope.isSelectedTag = (ticket, tag) ->
+    return $scope.selectedTicketTag? &&
+           $scope.selectedTicketTag.ticket_id is ticket.id &&
+           $scope.selectedTicketTag.tag_id is tag.id
 
-  $scope.selectTag = selectTag
-  $scope.isSelectedTag = isSelectedTag
+  $scope.isSelectedTicket = (ticket) ->
+    return $scope.selectedTicketTag? &&
+           $scope.selectedTicketTag.ticket_id is ticket.id
+
+  $scope.selectCustomTagAmount = (ticket) ->
+    console.log "Select Custom Tag Amount"
+    $scope.selectedCustomTagAmount = {ticket_id: ticket.id}
+
+  $scope.customAmountSelected = (ticket) ->
+    return $scope.selectedCustomTagAmount? && $scope.selectedCustomTagAmount.ticket_id == ticket.id
+
+
+  # showTagAmountDiv = (ticket) ->
+  #   return unless ticket?
+  #   $("#collapse-tag-amount-#{ticket.id}").collapse('show')
+
+  # hideTagAmountDiv = (ticket) ->
+  #   return unless ticket?
+  #   $("#collapse-tag-amount-#{ticket.id}").collapse('hide')
+
   $scope.amountTagged = calculateAmountTagged()
-  $scope.addTag = addTag
 
 api_tags = [
   {"id":1, "name": "Mike"},
