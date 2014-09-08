@@ -1,7 +1,7 @@
 ticketsControllers = angular.module('ticketsControllers', [])
 
 ticketsControllers.controller("TicketController", ['$scope', '$http', 'Ticket', 'TicketTag', 'Tag', ($scope, $http, Ticket, TicketTag, Tag) ->
-  $scope.tickets = Ticket.range({start_date: '2014-01-01', stop_date: '2014-05-31'})
+  $scope.tickets = Ticket.range({start_date: '2014-06-01', stop_date: '2015-05-31'})
   $scope.tags = Tag.all()
   $scope.selectedTicketTag = null
   $scope.selectedCustomTagAmount = null
