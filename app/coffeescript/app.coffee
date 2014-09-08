@@ -1,3 +1,8 @@
+if window.location.hostname is "localhost"
+  API_SERVER = "http://localhost:4001"
+else
+  API_SERVER = "http://wager-tagger-go-api.herokuapp.com"
+
 app = angular.module "wagerTagger",
                ['navigationControllers',
                 'ticketsControllers',

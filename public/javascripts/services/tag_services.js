@@ -4,7 +4,7 @@ tagServices = angular.module('tagServices', ['ngResource']);
 
 tagServices.factory('Tag', [
   '$resource', function($resource) {
-    return $resource('http://localhost:4001/tags/:id', {
+    return $resource("" + API_SERVER + "/tags/:id", {
       tagId: '@id'
     }, {
       all: {

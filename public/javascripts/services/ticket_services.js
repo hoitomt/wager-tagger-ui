@@ -4,7 +4,7 @@ ticketServices = angular.module('ticketServices', ['ngResource']);
 
 ticketServices.factory('Ticket', [
   '$resource', function($resource) {
-    return $resource('http://localhost:4001/tickets/:ticketId', {
+    return $resource("" + API_SERVER + "/tickets/:ticketId", {
       ticketId: '@id'
     }, {
       query: {
