@@ -35,17 +35,13 @@ ticketsControllers.controller("TicketController", ['$scope', '$http', 'Ticket', 
       ticketTag = new TicketTag
       ticketTag.ticket_id = ticket.id
       ticketTag.tag_id = $scope.selectedTicketTag.tag_id
-      ticketTag.amount = amount
+      ticketTag.amount = parseFloat(amount)
       ticketTag.name = getTagName($scope.selectedTicketTag.tag_id)
 
       ticket.ticket_tags.push(ticketTag)
       ticketTag.$save()
 
-  $scope.addTag = (ticketId, tagId) ->
-    console.log("Add Tag - Ticket ID: #{ticketId}, Tag Id: #{tagId}")
-
   $scope.deleteTag = (ticketTag, ticket) ->
-    console.log "Delete Tag", ticketTag
     removeTicketTag(ticket, ticketTag)
     TicketTag.delete({ticketId: ticketTag.ticket_id, id: ticketTag.id})
 
@@ -59,8 +55,11 @@ ticketsControllers.controller("TicketController", ['$scope', '$http', 'Ticket', 
            $scope.selectedTicketTag.ticket_id is ticket.id
 
   $scope.selectCustomTagAmount = (ticket) ->
-    console.log "Select Custom Tag Amount"
     $scope.selectedCustomTagAmount = {ticket_id: ticket.id}
+
+  $scope.submitCustomTag = (ticket, ev) ->
+    amount = $(ev.target).closest('form').find('#tag-amount').val()
+    $scope.createTicketTag(ticket, amount)
 
   $scope.customAmountSelected = (ticket) ->
     return $scope.selectedCustomTagAmount? && $scope.selectedCustomTagAmount.ticket_id == ticket.id

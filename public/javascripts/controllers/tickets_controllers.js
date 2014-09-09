@@ -56,17 +56,13 @@ ticketsControllers.controller("TicketController", [
         ticketTag = new TicketTag;
         ticketTag.ticket_id = ticket.id;
         ticketTag.tag_id = $scope.selectedTicketTag.tag_id;
-        ticketTag.amount = amount;
+        ticketTag.amount = parseFloat(amount);
         ticketTag.name = getTagName($scope.selectedTicketTag.tag_id);
         ticket.ticket_tags.push(ticketTag);
         return ticketTag.$save();
       }
     };
-    $scope.addTag = function(ticketId, tagId) {
-      return console.log("Add Tag - Ticket ID: " + ticketId + ", Tag Id: " + tagId);
-    };
     $scope.deleteTag = function(ticketTag, ticket) {
-      console.log("Delete Tag", ticketTag);
       removeTicketTag(ticket, ticketTag);
       return TicketTag["delete"]({
         ticketId: ticketTag.ticket_id,
@@ -80,10 +76,14 @@ ticketsControllers.controller("TicketController", [
       return ($scope.selectedTicketTag != null) && $scope.selectedTicketTag.ticket_id === ticket.id;
     };
     $scope.selectCustomTagAmount = function(ticket) {
-      console.log("Select Custom Tag Amount");
       return $scope.selectedCustomTagAmount = {
         ticket_id: ticket.id
       };
+    };
+    $scope.submitCustomTag = function(ticket, ev) {
+      var amount;
+      amount = $(ev.target).closest('form').find('#tag-amount').val();
+      return $scope.createTicketTag(ticket, amount);
     };
     $scope.customAmountSelected = function(ticket) {
       return ($scope.selectedCustomTagAmount != null) && $scope.selectedCustomTagAmount.ticket_id === ticket.id;
