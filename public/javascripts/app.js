@@ -1,5 +1,9 @@
 var API_SERVER, app;
 
+window.addEventListener('load', function() {
+  return FastClick.attach(document.body);
+}, false);
+
 if (window.location.hostname === "localhost") {
   API_SERVER = "http://localhost:4001";
 } else {

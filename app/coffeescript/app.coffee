@@ -1,3 +1,9 @@
+# FastClick.attach(document.body)
+
+window.addEventListener 'load', ->
+    FastClick.attach(document.body);
+, false
+
 if window.location.hostname is "localhost"
   API_SERVER = "http://localhost:4001"
 else
