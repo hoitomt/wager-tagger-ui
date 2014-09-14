@@ -61,11 +61,20 @@ ticketsControllers.controller("TicketController", ['$scope', '$http', 'Ticket', 
     amount = $(ev.target).closest('form').find('#tag-amount').val()
     $scope.createTicketTag(ticket, amount)
 
+    # Reset UI
+    $(ev.target).closest('form').find('#tag-amount').val('')
+    $scope.resetUi()
+
   $scope.customAmountSelected = (ticket) ->
     return $scope.selectedCustomTagAmount? && $scope.selectedCustomTagAmount.ticket_id == ticket.id
 
   $scope.toggleShowEditPanel = () ->
     $scope.showEditPanel = !$scope.showEditPanel
+
+  $scope.resetUi = () ->
+    $scope.selectedCustomTagAmount.ticket_id = null
+    $scope.selectedTicketTag = null
+    return
 
   $scope.amountTagged = calculateAmountTagged()
 ])

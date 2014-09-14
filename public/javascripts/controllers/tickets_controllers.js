@@ -83,13 +83,19 @@ ticketsControllers.controller("TicketController", [
     $scope.submitCustomTag = function(ticket, ev) {
       var amount;
       amount = $(ev.target).closest('form').find('#tag-amount').val();
-      return $scope.createTicketTag(ticket, amount);
+      $scope.createTicketTag(ticket, amount);
+      $(ev.target).closest('form').find('#tag-amount').val('');
+      return $scope.resetUi();
     };
     $scope.customAmountSelected = function(ticket) {
       return ($scope.selectedCustomTagAmount != null) && $scope.selectedCustomTagAmount.ticket_id === ticket.id;
     };
     $scope.toggleShowEditPanel = function() {
       return $scope.showEditPanel = !$scope.showEditPanel;
+    };
+    $scope.resetUi = function() {
+      $scope.selectedCustomTagAmount.ticket_id = null;
+      $scope.selectedTicketTag = null;
     };
     return $scope.amountTagged = calculateAmountTagged();
   }
