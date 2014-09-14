@@ -59,7 +59,11 @@ ticketsControllers.controller("TicketController", [
         ticketTag.amount = parseFloat(amount);
         ticketTag.name = getTagName($scope.selectedTicketTag.tag_id);
         ticket.ticket_tags.push(ticketTag);
-        return ticketTag.$save();
+        ticketTag.$save(function(savedTicketTag) {
+          console.log("Saved", savedTicketTag);
+          return ticketTag.id = savedTicketTag.id;
+        });
+        return $scope.resetUi();
       }
     };
     $scope.deleteTag = function(ticketTag, ticket) {
@@ -85,7 +89,6 @@ ticketsControllers.controller("TicketController", [
       amount = $(ev.target).closest('form').find('#tag-amount').val();
       $scope.createTicketTag(ticket, amount);
       $(ev.target).closest('form').find('#tag-amount').val('');
-      return $scope.resetUi();
     };
     $scope.customAmountSelected = function(ticket) {
       return ($scope.selectedCustomTagAmount != null) && $scope.selectedCustomTagAmount.ticket_id === ticket.id;
@@ -94,8 +97,10 @@ ticketsControllers.controller("TicketController", [
       return $scope.showEditPanel = !$scope.showEditPanel;
     };
     $scope.resetUi = function() {
-      $scope.selectedCustomTagAmount.ticket_id = null;
       $scope.selectedTicketTag = null;
+      if ($scope.selectedCustomTagAmount != null) {
+        $scope.selectedCustomTagAmount.ticket_id = null;
+      }
     };
     return $scope.amountTagged = calculateAmountTagged();
   }

@@ -39,7 +39,11 @@ ticketsControllers.controller("TicketController", ['$scope', '$http', 'Ticket', 
       ticketTag.name = getTagName($scope.selectedTicketTag.tag_id)
 
       ticket.ticket_tags.push(ticketTag)
-      ticketTag.$save()
+      ticketTag.$save( (savedTicketTag) ->
+        console.log "Saved", savedTicketTag
+        ticketTag.id = savedTicketTag.id
+      )
+      $scope.resetUi()
 
   $scope.deleteTag = (ticketTag, ticket) ->
     removeTicketTag(ticket, ticketTag)
@@ -63,7 +67,7 @@ ticketsControllers.controller("TicketController", ['$scope', '$http', 'Ticket', 
 
     # Reset UI
     $(ev.target).closest('form').find('#tag-amount').val('')
-    $scope.resetUi()
+    return
 
   $scope.customAmountSelected = (ticket) ->
     return $scope.selectedCustomTagAmount? && $scope.selectedCustomTagAmount.ticket_id == ticket.id
@@ -72,8 +76,9 @@ ticketsControllers.controller("TicketController", ['$scope', '$http', 'Ticket', 
     $scope.showEditPanel = !$scope.showEditPanel
 
   $scope.resetUi = () ->
-    $scope.selectedCustomTagAmount.ticket_id = null
     $scope.selectedTicketTag = null
+    if $scope.selectedCustomTagAmount?
+      $scope.selectedCustomTagAmount.ticket_id = null
     return
 
   $scope.amountTagged = calculateAmountTagged()
