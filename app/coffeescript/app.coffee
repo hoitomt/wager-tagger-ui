@@ -14,29 +14,32 @@ else
 app = angular.module "wagerTagger", ['ticketsControllers',
                 'homeControllers',
                 'financeControllers',
+                'financeServices'
+                'syncServices',
                 'ticketServices',
                 'ticketTagServices',
                 'tagServices',
-                'syncServices',
                 'ngResource',
                 'ngRoute']
 
 app.config ['$routeProvider', ($routeProvider) ->
   $routeProvider.
-    when('/home', {
+    when('/', {
+      templateUrl: 'public/templates/finances.html',
+      controller: 'FinanceController'
+    }).
+    when('/tickets', {
       templateUrl: 'public/templates/home.html',
       controller: 'HomeController'
     }).
-    when('/tickets', {
+    when('/sync', {
       templateUrl: 'public/templates/tickets.html',
       controller: 'TicketsController'
     }).
     when('/finances', {
-      templateUrl: 'public/templates/finances.html',
-      controller: 'FinanceController'
     }).
     otherwise({
-      redirectTo: '/home'
+      redirectTo: '/'
     })
 ]
 

@@ -12,21 +12,21 @@ if (window.location.hostname === "localhost") {
   API_SERVER_SYNC = "http://wager-tagger-api.herokuapp.com/api/v1";
 }
 
-app = angular.module("wagerTagger", ['ticketsControllers', 'homeControllers', 'financeControllers', 'ticketServices', 'ticketTagServices', 'tagServices', 'syncServices', 'ngResource', 'ngRoute']);
+app = angular.module("wagerTagger", ['ticketsControllers', 'homeControllers', 'financeControllers', 'financeServices', 'syncServices', 'ticketServices', 'ticketTagServices', 'tagServices', 'ngResource', 'ngRoute']);
 
 app.config([
   '$routeProvider', function($routeProvider) {
-    return $routeProvider.when('/home', {
-      templateUrl: 'public/templates/home.html',
-      controller: 'HomeController'
-    }).when('/tickets', {
-      templateUrl: 'public/templates/tickets.html',
-      controller: 'TicketsController'
-    }).when('/finances', {
+    return $routeProvider.when('/', {
       templateUrl: 'public/templates/finances.html',
       controller: 'FinanceController'
-    }).otherwise({
-      redirectTo: '/home'
+    }).when('/tickets', {
+      templateUrl: 'public/templates/home.html',
+      controller: 'HomeController'
+    }).when('/sync', {
+      templateUrl: 'public/templates/tickets.html',
+      controller: 'TicketsController'
+    }).when('/finances', {}).otherwise({
+      redirectTo: '/'
     });
   }
 ]);

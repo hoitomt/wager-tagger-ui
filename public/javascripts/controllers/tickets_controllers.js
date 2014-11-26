@@ -3,8 +3,7 @@ var ticketsControllers;
 ticketsControllers = angular.module('ticketsControllers', []);
 
 ticketsControllers.controller("TicketsController", [
-  '$scope', 'SyncRecent', function($scope, SyncRecent) {
-    $scope.isCollapsed = true;
+  '$scope', 'SyncRecent', 'SyncAll', function($scope, SyncRecent, SyncAll) {
     $scope.syncRecent = function() {
       return SyncRecent.get();
     };

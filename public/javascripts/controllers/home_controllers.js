@@ -5,7 +5,6 @@ homeControllers = angular.module('homeControllers', []);
 homeControllers.controller("HomeController", [
   '$scope', '$http', '$routeParams', 'Ticket', 'TicketTag', 'Tag', function($scope, $http, $routeParams, Ticket, TicketTag, Tag) {
     var calculateAmountTagged, getTagName, removeTicketTag;
-    console.log("Home Controller");
     $scope.tickets = Ticket.range({
       start_date: '2014-06-01',
       stop_date: '2015-05-31'
