@@ -1,4 +1,4 @@
-var API_SERVER, app;
+var API_SERVER, API_SERVER_SYNC, app;
 
 window.addEventListener('load', function() {
   return FastClick.attach(document.body);
@@ -6,11 +6,28 @@ window.addEventListener('load', function() {
 
 if (window.location.hostname === "localhost") {
   API_SERVER = "http://localhost:4001";
+  API_SERVER_SYNC = "http://localhost:3000/api/v1";
 } else {
   API_SERVER = "http://wager-tagger-go-api.herokuapp.com";
+  API_SERVER_SYNC = "http://wager-tagger-api.herokuapp.com/api/v1";
 }
 
-app = angular.module("wagerTagger", ['navigationControllers', 'ticketsControllers', 'ticketServices', 'ticketTagServices', 'tagServices', 'ngResource']);
+app = angular.module("wagerTagger", ['ticketsControllers', 'homeControllers', 'financeControllers', 'ticketServices', 'ticketTagServices', 'tagServices', 'syncServices', 'ngResource', 'ngRoute']);
+
+app.config([
+  '$routeProvider', function($routeProvider) {
+    return $routeProvider.when('/', {
+      templateUrl: 'public/templates/home.html',
+      controller: 'HomeController'
+    }).when('/tickets', {
+      templateUrl: 'public/templates/tickets.html',
+      controller: 'TicketsController'
+    }).when('/finances', {
+      templateUrl: 'public/templates/finances.html',
+      controller: 'FinanceController'
+    });
+  }
+]);
 
 app.config(function($httpProvider) {
   $httpProvider.defaults.headers.common['Authorization'] = 'Token token="8433f4313d49d1a89821e115579eed18"';
