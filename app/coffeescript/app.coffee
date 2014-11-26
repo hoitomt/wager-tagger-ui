@@ -23,7 +23,7 @@ app = angular.module "wagerTagger", ['ticketsControllers',
 
 app.config ['$routeProvider', ($routeProvider) ->
   $routeProvider.
-    when('/', {
+    when('/home', {
       templateUrl: 'public/templates/home.html',
       controller: 'HomeController'
     }).
@@ -34,6 +34,9 @@ app.config ['$routeProvider', ($routeProvider) ->
     when('/finances', {
       templateUrl: 'public/templates/finances.html',
       controller: 'FinanceController'
+    }).
+    otherwise({
+      redirectTo: '/home'
     })
 ]
 
