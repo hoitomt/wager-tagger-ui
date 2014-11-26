@@ -29,11 +29,11 @@ app.config ['$routeProvider', ($routeProvider) ->
       controller: 'FinanceController'
     }).
     when('/tickets', {
-      templateUrl: 'public/templates/home.html',
+      templateUrl: 'public/templates/tickets.html',
       controller: 'HomeController'
     }).
     when('/sync', {
-      templateUrl: 'public/templates/tickets.html',
+      templateUrl: 'public/templates/sync.html',
       controller: 'TicketsController'
     }).
     when('/finances', {

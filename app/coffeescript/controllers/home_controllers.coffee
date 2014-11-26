@@ -75,6 +75,13 @@ homeControllers.controller("HomeController", ['$scope', '$http', '$routeParams',
   $scope.toggleShowEditPanel = () ->
     $scope.showEditPanel = !$scope.showEditPanel
 
+  $scope.ticketResultClass = (ticket) ->
+    console.log "Outcome #{ticket.outcome}"
+    switch ticket.outcome
+      when "Pending" then return "panel-warning"
+      when "Lost" then return "panel-danger"
+      when "Won" then return "panel-success"
+
   $scope.resetUi = () ->
     $scope.selectedTicketTag = null
     if $scope.selectedCustomTagAmount?

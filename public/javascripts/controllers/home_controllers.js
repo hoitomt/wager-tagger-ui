@@ -96,6 +96,17 @@ homeControllers.controller("HomeController", [
     $scope.toggleShowEditPanel = function() {
       return $scope.showEditPanel = !$scope.showEditPanel;
     };
+    $scope.ticketResultClass = function(ticket) {
+      console.log("Outcome " + ticket.outcome);
+      switch (ticket.outcome) {
+        case "Pending":
+          return "panel-warning";
+        case "Lost":
+          return "panel-danger";
+        case "Won":
+          return "panel-success";
+      }
+    };
     $scope.resetUi = function() {
       $scope.selectedTicketTag = null;
       if ($scope.selectedCustomTagAmount != null) {
