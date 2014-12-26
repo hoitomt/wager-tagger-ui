@@ -97,7 +97,6 @@ homeControllers.controller("HomeController", [
       return $scope.showEditPanel = !$scope.showEditPanel;
     };
     $scope.ticketResultClass = function(ticket) {
-      console.log("Outcome " + ticket.outcome);
       switch (ticket.outcome) {
         case "Pending":
           return "panel-warning";
@@ -111,6 +110,11 @@ homeControllers.controller("HomeController", [
       $scope.selectedTicketTag = null;
       if ($scope.selectedCustomTagAmount != null) {
         $scope.selectedCustomTagAmount.ticket_id = null;
+      }
+    };
+    $scope.ticketIsTagged = function(ticket) {
+      if (ticket.ticket_tags.length <= 0) {
+        return "(Not Tagged)";
       }
     };
     return $scope.amountTagged = calculateAmountTagged();

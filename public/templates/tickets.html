@@ -4,7 +4,7 @@
       <div class="panel-heading">
         <h4 class="panel-title">
           <a data-toggle="collapse" data-parent="#accordion" data-target="#collapse{{ticket.id}}" href="">
-            {{ticket.wager_type}} on {{ticket.wager_date | date:'MMM dd, yyyy'}}
+            {{ticket.wager_type}} on {{ticket.wager_date | date:'MMM dd, yyyy'}} {{ticketIsTagged(ticket)}}
           </a>
         </h4>
       </div>

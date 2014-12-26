@@ -76,7 +76,6 @@ homeControllers.controller("HomeController", ['$scope', '$http', '$routeParams',
     $scope.showEditPanel = !$scope.showEditPanel
 
   $scope.ticketResultClass = (ticket) ->
-    console.log "Outcome #{ticket.outcome}"
     switch ticket.outcome
       when "Pending" then return "panel-warning"
       when "Lost" then return "panel-danger"
@@ -87,6 +86,10 @@ homeControllers.controller("HomeController", ['$scope', '$http', '$routeParams',
     if $scope.selectedCustomTagAmount?
       $scope.selectedCustomTagAmount.ticket_id = null
     return
+
+  $scope.ticketIsTagged = (ticket) ->
+    if ticket.ticket_tags.length <= 0
+      return "(Not Tagged)"
 
   $scope.amountTagged = calculateAmountTagged()
 ])
