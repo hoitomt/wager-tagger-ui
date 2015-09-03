@@ -11,6 +11,9 @@ else
   API_SERVER = "http://wager-tagger-go-api.herokuapp.com"
   API_SERVER_SYNC = "http://wager-tagger-api.herokuapp.com/api/v1"
 
+SEASON_START_DATE = '2015-06-01'
+SEASON_STOP_DATE = '2016-05-31'
+
 app = angular.module "wagerTagger", ['ticketsControllers',
                 'homeControllers',
                 'financeControllers',

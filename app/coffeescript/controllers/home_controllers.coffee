@@ -1,7 +1,7 @@
 homeControllers = angular.module('homeControllers', [])
 
 homeControllers.controller("HomeController", ['$scope', '$http', '$routeParams', 'Ticket', 'TicketTag', 'Tag', ($scope, $http, $routeParams, Ticket, TicketTag, Tag) ->
-  $scope.tickets = Ticket.range({start_date: '2015-06-01', stop_date: '2016-05-31'})
+  $scope.tickets = Ticket.range({start_date: SEASON_START_DATE, stop_date: SEASON_STOP_DATE})
   $scope.tags = Tag.all()
   $scope.selectedTicketTag = null
   $scope.selectedCustomTagAmount = null

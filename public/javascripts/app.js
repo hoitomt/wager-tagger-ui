@@ -1,4 +1,4 @@
-var API_SERVER, API_SERVER_SYNC, app;
+var API_SERVER, API_SERVER_SYNC, SEASON_START_DATE, SEASON_STOP_DATE, app;
 
 window.addEventListener('load', function() {
   return FastClick.attach(document.body);
@@ -11,6 +11,10 @@ if (window.location.hostname === "localhost") {
   API_SERVER = "http://wager-tagger-go-api.herokuapp.com";
   API_SERVER_SYNC = "http://wager-tagger-api.herokuapp.com/api/v1";
 }
+
+SEASON_START_DATE = '2015-06-01';
+
+SEASON_STOP_DATE = '2016-05-31';
 
 app = angular.module("wagerTagger", ['ticketsControllers', 'homeControllers', 'financeControllers', 'financeServices', 'syncServices', 'ticketServices', 'ticketTagServices', 'tagServices', 'ngResource', 'ngRoute']);
 

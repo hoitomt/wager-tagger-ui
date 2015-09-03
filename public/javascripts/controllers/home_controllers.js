@@ -6,8 +6,8 @@ homeControllers.controller("HomeController", [
   '$scope', '$http', '$routeParams', 'Ticket', 'TicketTag', 'Tag', function($scope, $http, $routeParams, Ticket, TicketTag, Tag) {
     var calculateAmountTagged, getTagName, removeTicketTag;
     $scope.tickets = Ticket.range({
-      start_date: '2015-06-01',
-      stop_date: '2016-05-31'
+      start_date: SEASON_START_DATE,
+      stop_date: SEASON_STOP_DATE
     });
     $scope.tags = Tag.all();
     $scope.selectedTicketTag = null;
