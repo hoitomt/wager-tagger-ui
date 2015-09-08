@@ -1,15 +1,13 @@
-var API_SERVER, API_SERVER_SYNC, SEASON_START_DATE, SEASON_STOP_DATE, app;
+var API_SERVER, SEASON_START_DATE, SEASON_STOP_DATE, app;
 
 window.addEventListener('load', function() {
   return FastClick.attach(document.body);
 }, false);
 
 if (window.location.hostname === "localhost") {
-  API_SERVER = "http://localhost:4001";
-  API_SERVER_SYNC = "http://localhost:3000/api/v1";
+  API_SERVER = "http://localhost:3000/api/v1";
 } else {
-  API_SERVER = "http://wager-tagger-go-api.herokuapp.com";
-  API_SERVER_SYNC = "http://wager-tagger-api.herokuapp.com/api/v1";
+  API_SERVER = "http://wager-tagger-api.herokuapp.com/api/v1";
 }
 
 SEASON_START_DATE = '2015-06-01';
