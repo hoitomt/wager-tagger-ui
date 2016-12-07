@@ -7,7 +7,7 @@ window.addEventListener('load', function() {
 if (window.location.hostname === "localhost") {
   API_SERVER = "http://localhost:3000/api/v1";
 } else {
-  API_SERVER = "http://wager-tagger.herokuapp.com/api/v1";
+  API_SERVER = "https://wager-tagger.herokuapp.com/api/v1";
 }
 
 SEASON_START_DATE = '2016-06-01';
