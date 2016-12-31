@@ -79,6 +79,12 @@ homeControllers.controller("HomeController", [
     $scope.isSelectedTicket = function(ticket) {
       return ($scope.selectedTicketTag != null) && $scope.selectedTicketTag.ticket_id === ticket.id;
     };
+    $scope.ticketIsSuccess = function(ticket) {
+      return ticket.outcome === "Won" || ticket.outcome === "Out";
+    };
+    $scope.isHeadToHead = function(ticketLineItem) {
+      return ticketLineItem.home_team && ticketLineItem.home_team.length > 0 && ticketLineItem.away_team && ticketLineItem.away_team.length > 0;
+    };
     $scope.selectCustomTagAmount = function(ticket) {
       return $scope.selectedCustomTagAmount = {
         ticket_id: ticket.id
@@ -103,6 +109,8 @@ homeControllers.controller("HomeController", [
         case "Lost":
           return "panel-danger";
         case "Won":
+          return "panel-success";
+        case "Out":
           return "panel-success";
       }
     };

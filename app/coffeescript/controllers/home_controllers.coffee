@@ -58,6 +58,13 @@ homeControllers.controller("HomeController", ['$scope', '$http', '$routeParams',
     return $scope.selectedTicketTag? &&
            $scope.selectedTicketTag.ticket_id is ticket.id
 
+  $scope.ticketIsSuccess = (ticket) ->
+    return ticket.outcome == "Won" || ticket.outcome == "Out"
+
+  $scope.isHeadToHead = (ticketLineItem) ->
+    return ticketLineItem.home_team && ticketLineItem.home_team.length > 0 &&
+           ticketLineItem.away_team && ticketLineItem.away_team.length > 0
+
   $scope.selectCustomTagAmount = (ticket) ->
     $scope.selectedCustomTagAmount = {ticket_id: ticket.id}
 
@@ -80,6 +87,7 @@ homeControllers.controller("HomeController", ['$scope', '$http', '$routeParams',
       when "Pending" then return "panel-warning"
       when "Lost" then return "panel-danger"
       when "Won" then return "panel-success"
+      when "Out" then return "panel-success"
 
   $scope.resetUi = () ->
     $scope.selectedTicketTag = null
