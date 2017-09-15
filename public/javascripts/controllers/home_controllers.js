@@ -103,15 +103,14 @@ homeControllers.controller("HomeController", [
       return $scope.showEditPanel = !$scope.showEditPanel;
     };
     $scope.ticketResultClass = function(ticket) {
-      switch (ticket.outcome) {
-        case "Pending":
-          return "panel-warning";
-        case "Wager Lost":
-          return "panel-danger";
-        case "Wager Won":
-          return "panel-success";
-        case "No Action":
-          return "panel-success";
+      if (ticket.outcome.match(/pending/i)) {
+        return "panel-warning";
+      } else if (ticket.outcome.match(/lost/i)) {
+        return "panel-danger";
+      } else if (ticket.outcome.match(/won/i)) {
+        return "panel-success";
+      } else if (ticket.outcome.match(/no action/i)) {
+        return "panel-success";
       }
     };
     $scope.resetUi = function() {

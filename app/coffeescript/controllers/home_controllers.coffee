@@ -83,11 +83,14 @@ homeControllers.controller("HomeController", ['$scope', '$http', '$routeParams',
     $scope.showEditPanel = !$scope.showEditPanel
 
   $scope.ticketResultClass = (ticket) ->
-    switch ticket.outcome
-      when "Pending" then return "panel-warning"
-      when "Wager Lost" then return "panel-danger"
-      when "Wager Won" then return "panel-success"
-      when "No Action" then return "panel-success"
+    if ticket.outcome.match /pending/i
+      return "panel-warning"
+    else if ticket.outcome.match /lost/i
+      return "panel-danger"
+    else if ticket.outcome.match /won/i
+      return "panel-success"
+    else if ticket.outcome.match /no action/i
+      return "panel-success"
 
   $scope.resetUi = () ->
     $scope.selectedTicketTag = null
