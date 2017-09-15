@@ -10,9 +10,9 @@ if (window.location.hostname === "localhost") {
   API_SERVER = "https://wager-tagger.herokuapp.com/api/v1";
 }
 
-SEASON_START_DATE = '2017-06-01';
+SEASON_START_DATE = '2017-07-01';
 
-SEASON_STOP_DATE = '2018-05-31';
+SEASON_STOP_DATE = '2018-06-30';
 
 app = angular.module("wagerTagger", ['ticketsControllers', 'homeControllers', 'financeControllers', 'financeServices', 'syncServices', 'ticketServices', 'ticketTagServices', 'tagServices', 'ngResource', 'ngRoute']);
 
