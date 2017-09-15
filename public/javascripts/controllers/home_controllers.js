@@ -106,11 +106,11 @@ homeControllers.controller("HomeController", [
       switch (ticket.outcome) {
         case "Pending":
           return "panel-warning";
-        case "Lost":
+        case "Wager Lost":
           return "panel-danger";
-        case "Won":
+        case "Wager Won":
           return "panel-success";
-        case "Out":
+        case "No Action":
           return "panel-success";
       }
     };
