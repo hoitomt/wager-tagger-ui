@@ -4,7 +4,7 @@
       <div class="panel-heading">
         <h4 class="panel-title">
           <a data-toggle="collapse" data-parent="#accordion" data-target="#collapse{{ticket.id}}" href="">
-            {{ticket.wager_type}} on {{ticket.wager_date | date:'MMM dd, yyyy'}} {{ticketIsTagged(ticket)}}
+            {{ticket.wager_type}} on {{ticket.wager_date | date:'MMM dd, yyyy'}} {{tagStatus(ticket)}}
           </a>
         </h4>
         <div style="margin-top: 5px;">
@@ -23,7 +23,7 @@
           <div class="clearfix"></div>
           <p class="small">
             <span >Tags: </span>
-            <span class="small" ng-repeat="ticketTag in ticket.ticket_tags">({{ticketTag.name}} {{ticketTag.amount | currency}}) </span>
+            <span class="small" ng-repeat="ticketTag in ticket.ticket_tags">({{ticketTag.tag_name}} {{ticketTag.amount | currency}}) </span>
           </p>
           <div style="margin-bottom: 5px;" ng-show="showEditPanel">
             <button ng-repeat="ticketTag in ticket.ticket_tags"

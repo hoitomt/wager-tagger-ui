@@ -13,8 +13,18 @@ homeControllers.controller("HomeController", [
     $scope.selectedTicketTag = null;
     $scope.selectedCustomTagAmount = null;
     $scope.showEditPanel = false;
-    calculateAmountTagged = function() {
-      return 0.0;
+    calculateAmountTagged = function(ticket) {
+      var currentTagAmount, tagAmounts;
+      tagAmounts = ticket.ticket_tags.map(function(tag) {
+        return tag.amount;
+      });
+      currentTagAmount = 0;
+      if (tagAmounts.length > 0) {
+        currentTagAmount = tagAmounts.reduce(function(x, y) {
+          return x + y;
+        });
+      }
+      return currentTagAmount;
     };
     $scope.selectTag = function(ticket, tag) {
       if ($scope.isSelectedTag(ticket, tag)) {
@@ -119,11 +129,19 @@ homeControllers.controller("HomeController", [
         $scope.selectedCustomTagAmount.ticket_id = null;
       }
     };
-    $scope.ticketIsTagged = function(ticket) {
+    $scope.tagStatus = function(ticket) {
+      var displayAmount, openAmount, taggedAmount;
+      taggedAmount = calculateAmountTagged(ticket);
+      openAmount = ticket.amount_wagered - taggedAmount;
+      if (openAmount > 0) {
+        displayAmount = Math.round(openAmount * 100) / 100;
+        return "($" + (displayAmount.toFixed(2)) + " untagged)";
+      }
+    };
+    return $scope.ticketIsTagged = function(ticket) {
       if (ticket.ticket_tags.length <= 0) {
         return "(Not Tagged)";
       }
     };
-    return $scope.amountTagged = calculateAmountTagged();
   }
 ]);

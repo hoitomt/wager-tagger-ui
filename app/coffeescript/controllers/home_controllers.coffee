@@ -8,8 +8,13 @@ homeControllers.controller("HomeController", ['$scope', '$http', '$routeParams',
   $scope.showEditPanel = false
 
   # This should live on a ticket model
-  calculateAmountTagged = () ->
-    0.0
+  calculateAmountTagged = (ticket) ->
+    tagAmounts = ticket.ticket_tags.map (tag) ->
+      tag.amount
+    currentTagAmount = 0
+    if(tagAmounts.length > 0)
+      currentTagAmount = tagAmounts.reduce (x,y) -> x + y
+    return currentTagAmount
 
   $scope.selectTag = (ticket, tag) ->
     if $scope.isSelectedTag(ticket, tag)
@@ -98,9 +103,14 @@ homeControllers.controller("HomeController", ['$scope', '$http', '$routeParams',
       $scope.selectedCustomTagAmount.ticket_id = null
     return
 
+  $scope.tagStatus = (ticket) ->
+    taggedAmount = calculateAmountTagged(ticket)
+    openAmount = ticket.amount_wagered - taggedAmount
+    if openAmount > 0
+      displayAmount = Math.round(openAmount * 100) / 100
+      return "($#{displayAmount.toFixed(2)} untagged)"
+
   $scope.ticketIsTagged = (ticket) ->
     if ticket.ticket_tags.length <= 0
       return "(Not Tagged)"
-
-  $scope.amountTagged = calculateAmountTagged()
 ])
